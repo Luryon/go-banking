@@ -3,7 +3,7 @@ package storage
 import (
 	"fmt"
 
-	"github.com/luryon/go-bank-system/model"
+	"github.com/luryon/go-banking/model"
 )
 
 // Memory es la estructura donde se cargan los datos para tranajr

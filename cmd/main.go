@@ -2,8 +2,8 @@ package main
 
 import (
 	echo "github.com/labstack/echo/v4"
-	"github.com/luryon/go-bank-system/handler"
-	"github.com/luryon/go-bank-system/storage"
+	"github.com/luryon/go-banking/handler"
+	"github.com/luryon/go-banking/storage"
 )
 
 func main() {

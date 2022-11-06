@@ -1,8 +1,6 @@
 package operations
 
-import (
-	"github.com/luryon/go-bank-system/model"
-)
+import "github.com/luryon/go-banking/model"
 
 type new_operation struct {
 	send_acc int

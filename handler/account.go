@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/labstack/echo/v4"
-	"github.com/luryon/go-bank-system/model"
+	"github.com/luryon/go-banking/model"
 )
 
 type account struct {

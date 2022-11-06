@@ -1,6 +1,6 @@
 package handler
 
-import "github.com/luryon/go-bank-system/model"
+import "github.com/luryon/go-banking/model"
 
 type Storage interface {
 	Create(acc *model.Account) error
