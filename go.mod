@@ -1,4 +1,4 @@
-module github.com/luryon/go-bank-system
+module github.com/luryon/go-banking
 
 go 1.19
 
