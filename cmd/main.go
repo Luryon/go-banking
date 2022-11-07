@@ -12,7 +12,6 @@ func main() {
 	mem := storage.NewMemory()
 	accService := handler.NewAccount(&mem)
 	opeService := handler.NewOperation(&mem)
-
 	accounts := e.Group("/accounts")
 	operations := e.Group("/operations")
 
@@ -22,5 +21,6 @@ func main() {
 	accounts.GET("/:id", accService.GetById)
 	accounts.DELETE("/:id", accService.Delete)
 	operations.POST("/send", opeService.Send)
-	e.Start(":8080")
+
+	e.Start(":80")
 }
