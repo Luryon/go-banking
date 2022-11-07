@@ -25,7 +25,7 @@ func main() {
 	accounts.DELETE("/:id", accService.Delete)
 	operations.POST("/send", opeService.Send)
 
-	if err := e.StartTLS(":443", "fullchain.pem", "privkey.pem"); err != http.ErrServerClosed {
+	if err := e.StartTLS(":443", "/usr/local/go-api/go-banking/cmd/fullchain.pem", "/usr/local/go-api/go-banking/cmd/privkey.pem"); err != http.ErrServerClosed {
 		log.Fatal(err)
 	}
 }
