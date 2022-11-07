@@ -1,6 +1,9 @@
 package main
 
 import (
+	"log"
+	"net/http"
+
 	echo "github.com/labstack/echo/v4"
 	"github.com/luryon/go-banking/handler"
 	"github.com/luryon/go-banking/storage"
@@ -22,5 +25,7 @@ func main() {
 	accounts.DELETE("/:id", accService.Delete)
 	operations.POST("/send", opeService.Send)
 
-	e.Start(":80")
+	if err := e.StartTLS(":80", "fullchain.pem", "privkey.pem"); err != http.ErrServerClosed {
+		log.Fatal(err)
+	}
 }
