@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	echo "github.com/labstack/echo/v4"
 	"github.com/luryon/go-banking/handler"
@@ -10,6 +12,8 @@ import (
 )
 
 func main() {
+	uri := os.Getenv("DATABASE_URI")
+	fmt.Println(uri)
 	e := echo.New()
 
 	mem := storage.NewMemory()
