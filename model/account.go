@@ -10,6 +10,8 @@ type Account struct {
 	Token          string    `json:"token"`
 	Name           string    `json:"name"`
 	Last_name      string    `json:"last_name"`
+	Email          string    `json:"email"`
+	Password       string    `json:"password"`
 	Amount_on_acc  float64   `json:"amount_on_acc"`
 	Created_at     time.Time `json:"created_at"`
 	Last_operation time.Time `json:"last_operation"`

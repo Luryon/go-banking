@@ -6,15 +6,17 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/joho/godotenv"
 	echo "github.com/labstack/echo/v4"
 	"github.com/luryon/go-banking/handler"
 	"github.com/luryon/go-banking/storage"
 )
 
 func main() {
-	uri := os.Getenv("DATABASE_URI")
-	fmt.Println(uri)
 	e := echo.New()
+	godotenv.Load()
+
+	fmt.Println((os.Getenv("SECRET_KEY")))
 
 	mem := storage.NewMemory()
 	accService := handler.NewAccount(&mem)
