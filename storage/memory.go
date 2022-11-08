@@ -1,8 +1,6 @@
 package storage
 
 import (
-	"fmt"
-
 	"github.com/luryon/go-banking/model"
 )
 
@@ -69,19 +67,20 @@ func (m *Memory) Send(tx model.Operation) error {
 	acc1 := m.Accounts[tx.Origin_acc]
 	acc2 := m.Accounts[tx.Dest_acc]
 
-	fmt.Printf("%v", m.Accounts[1])
-	fmt.Printf("%v %v %v ", acc1, acc2, tx)
-
 	if tx.Amount > acc1.Amount_on_acc {
 		return ErrAmountExceedAccountAmount
 	}
 
 	acc1.Amount_on_acc -= tx.Amount
 	acc2.Amount_on_acc += tx.Amount
-	fmt.Println(acc1, acc2)
 
 	m.Accounts[tx.Origin_acc] = acc1
 	m.Accounts[tx.Dest_acc] = acc2
 
 	return nil
+}
+
+func Modify(n int) int {
+
+	return n
 }
