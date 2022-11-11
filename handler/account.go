@@ -17,6 +17,10 @@ func NewAccount(storage Storage) account {
 	return account{storage}
 }
 
+func (a *account) Migrate(c echo.Context) error {
+	return a.storage.Migrate()
+}
+
 func (a *account) Create(c echo.Context) error {
 	data := model.Account{}
 	err := c.Bind(&data)
