@@ -19,14 +19,15 @@ func main() {
 
 	accStorage := storage.NewMySQLAccount(db)
 	accService := handler.NewAccount(accStorage)
+	accStorage.Migrate()
 
 	// opeService := handler.NewOperation(&mem)
 	accounts := e.Group("/accounts")
 	// operations := e.Group("/operations")
 
-	accounts.GET("/", accService.Migrate)
-	// accounts.POST("/new", accService.Create)
-	// accounts.PUT("/update/:id", accService.Update)
+	// accounts.GET("/", accService.Migrate)
+	accounts.POST("/new", accService.Create)
+	accounts.PUT("/update/:id", accService.Update)
 	// accounts.GET("", accService.GetAll)
 	// accounts.GET("/:id", accService.GetById)
 	// accounts.DELETE("/:id", accService.Delete)
