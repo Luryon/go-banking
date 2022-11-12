@@ -18,7 +18,7 @@ type Account struct {
 }
 
 // accounts es una lista de cuentas
-type Accounts []Account
+type Accounts []*Account
 
 // NewAccount genera una nueva cuenta
 func (list_acc *Accounts) NewAccount(token, name, last_name string, amount float64) {
@@ -31,7 +31,7 @@ func (list_acc *Accounts) NewAccount(token, name, last_name string, amount float
 		Created_at:     time.Now(),
 		Last_operation: time.Time{},
 	}
-	*list_acc = append(*list_acc, acc)
+	*list_acc = append(*list_acc, &acc)
 }
 
 // NewAccountsList crea una lista de cuentas

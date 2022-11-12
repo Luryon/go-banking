@@ -28,7 +28,7 @@ func main() {
 	// accounts.GET("/", accService.Migrate)
 	accounts.POST("/new", accService.Create)
 	accounts.PUT("/update/:id", accService.Update)
-	// accounts.GET("", accService.GetAll)
+	accounts.GET("", accService.GetAll)
 	// accounts.GET("/:id", accService.GetById)
 	// accounts.DELETE("/:id", accService.Delete)
 	// operations.POST("/send", opeService.Send)

@@ -52,14 +52,14 @@ func (a *account) Update(c echo.Context) error {
 	return c.String(http.StatusOK, "Cuenta Acualizada Correctamente")
 }
 
-// func (a *account) GetAll(c echo.Context) error {
-// 	resp, err := a.storage.GetAll()
-// 	if err != nil {
-// 		return err
-// 	}
+func (a *account) GetAll(c echo.Context) error {
+	resp, err := a.storage.GetAll()
+	if err != nil {
+		return err
+	}
 
-// 	return c.JSON(http.StatusOK, &resp)
-// }
+	return c.JSON(http.StatusOK, &resp)
+}
 
 // func (a *account) GetById(c echo.Context) error {
 // 	id, err := strconv.Atoi(c.Param("id"))

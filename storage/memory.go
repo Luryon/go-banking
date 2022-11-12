@@ -46,7 +46,7 @@ func (m *Memory) GetAll() (*model.Accounts, error) {
 
 	for _, v := range m.Accounts {
 		data := v
-		accts_registered = append(accts_registered, data)
+		accts_registered = append(accts_registered, &data)
 	}
 
 	return &accts_registered, nil

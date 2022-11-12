@@ -26,6 +26,8 @@ const (
 	VALUES(?, ?, ?, ?, ?, ?, ?)`
 	UpdateMySQL = `UPDATE accounts SET name = ?, last_name = ?, token = ?, last_operation = ?
 	WHERE id = ?`
+	GetAllMySQL = `SELECT id, token, name, last_name, 
+	amount_on_acc, created_at, last_operation, email FROM accounts`
 )
 
 // mySQLProduct used fir work with postgres - product
@@ -71,9 +73,9 @@ func (m *mySQLAccount) Create(acc *model.Account) error {
 	fmt.Println(acc.Password)
 
 	stmt.Exec(
-		acc.Token,
+		stringToNull(acc.Token),
 		acc.Name,
-		acc.Last_name,
+		stringToNull(acc.Last_name),
 		acc.Email,
 		acc.Password,
 		1500,
@@ -86,30 +88,64 @@ func (m *mySQLAccount) Create(acc *model.Account) error {
 
 func (m *mySQLAccount) Update(id int, acc *model.Account) error {
 	res := m.db.QueryRow(GetEpassword, id)
-	fmt.Println(res)
-
 	var e_pass string
 	res.Scan(&e_pass)
-	fmt.Println(e_pass)
 
 	check, err := check_password(acc.Password, e_pass)
-	if err != nil {
+	if err != nil || !check {
 		return err
 	}
-
-	fmt.Println(check)
 
 	stmt, err := m.db.Prepare(UpdateMySQL)
 	if err != nil {
 		return err
 	}
 
-	result, err := stmt.Exec(acc.Name, acc.Last_name, acc.Token, time.Now(), id)
+	result, err := stmt.Exec(
+		stringToNull(acc.Name),
+		stringToNull(acc.Last_name),
+		stringToNull(acc.Token),
+		time.Now(),
+		id)
 	if err != nil {
 		return err
 	}
 
-	fmt.Println(result)
+	if rows, err := result.RowsAffected(); rows != 1 {
+		return err
+	}
 
 	return nil
+}
+
+func (m *mySQLAccount) GetAll() (*model.Accounts, error) {
+	accts := model.Accounts{}
+
+	stmt, err := m.db.Prepare(GetAllMySQL)
+	if err != nil {
+		return nil, err
+	}
+
+	rows, err := stmt.Query()
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		acc := &model.Account{}
+		rows.Scan(
+			&acc.Id,
+			&acc.Token,
+			&acc.Name,
+			&acc.Last_name,
+			&acc.Amount_on_acc,
+			&acc.Created_at,
+			&acc.Last_operation,
+		)
+		acc.Password = "Encrypted by Server"
+		accts = append(accts, acc)
+	}
+
+	return &accts, nil
 }
