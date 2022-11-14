@@ -1,5 +1,2 @@
-./cmd/fullchain.pem
-.cmd/example-cert.pem
-/cmd/privkey.pem
-cmd/example-key.pem
+cmd/
 .env
