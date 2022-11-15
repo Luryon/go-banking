@@ -45,3 +45,7 @@ func stringToNull(s string) sql.NullString {
 	}
 	return null
 }
+
+type scanner interface {
+	Scan(dest ...any) error
+}

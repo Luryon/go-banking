@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -10,25 +9,21 @@ import (
 )
 
 type operation struct {
-	CurrentID int
-	operation Operator
+	storage Operator
 }
 
-func NewOperation(o Operator) operation {
-	return operation{0, o}
+func NewOperation(storage Operator) operation {
+	return operation{storage}
 }
 
 func (o *operation) Send(c echo.Context) error {
-	o.CurrentID += 1
 
 	tx := model.Operation{}
 	c.Bind(&tx)
-	fmt.Printf("%v\n", tx)
-	tx.Id = o.CurrentID
 	tx.Time = time.Now()
 	tx.State = "Started"
 
-	err := o.operation.Send(tx)
+	err := o.storage.Send(&tx)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err)
 	}

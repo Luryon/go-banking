@@ -58,33 +58,33 @@ func (a *account) GetAll(c echo.Context) error {
 		return err
 	}
 
-	return c.JSON(http.StatusOK, &resp)
+	return c.JSON(http.StatusOK, resp)
 }
 
-// func (a *account) GetById(c echo.Context) error {
-// 	id, err := strconv.Atoi(c.Param("id"))
-// 	if err != nil {
-// 		return err
-// 	}
+func (a *account) GetById(c echo.Context) error {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return err
+	}
 
-// 	resp, err := a.storage.GetById(id)
-// 	if err != nil {
-// 		return err
-// 	}
+	resp, err := a.storage.GetById(id)
+	if err != nil {
+		return err
+	}
 
-// 	return c.JSON(http.StatusOK, resp)
-// }
+	return c.JSON(http.StatusOK, resp)
+}
 
-// func (a *account) Delete(c echo.Context) error {
-// 	id, err := strconv.Atoi(c.Param("id"))
-// 	if err != nil {
-// 		return err
-// 	}
+func (a *account) Delete(c echo.Context) error {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return err
+	}
 
-// 	err = a.storage.Delete(id)
-// 	if err != nil {
-// 		return err
-// 	}
+	err = a.storage.Delete(id)
+	if err != nil {
+		return err
+	}
 
-// 	return c.String(http.StatusOK, "Cuenta eliminada Correctamente")
-// }
+	return c.String(http.StatusOK, "Cuenta eliminada Correctamente")
+}

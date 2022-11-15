@@ -6,8 +6,8 @@ import (
 
 // account es el modelo de cada cuenta
 type Account struct {
-	Id             int       `json:"id"`
-	Token          string    `json:"token"`
+	Id             int       `json:"id" query:"id"`
+	Token          string    `json:"token" query:"token"`
 	Name           string    `json:"name"`
 	Last_name      string    `json:"last_name"`
 	Email          string    `json:"email"`
