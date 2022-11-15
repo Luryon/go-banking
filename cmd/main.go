@@ -19,8 +19,9 @@ func main() {
 
 	opeStorage := storage.NewMySQLOperation(db)
 	opeService := handler.NewOperation(opeStorage)
-	accounts := e.Group("/accounts")
-	operations := e.Group("/operations")
+	api := e.Group("/api/v1")
+	accounts := api.Group("/accounts")
+	operations := api.Group("/operations")
 
 	accounts.GET("/", accService.Migrate)
 	accounts.POST("/new", accService.Create)
